@@ -1,39 +1,120 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">            
-    <title>Formulàrio</title>
-</head>
-<body>
-    
-    <div class="container">  
-        
-        <div class="form_box">
+/* Reset básico para padding, margin e box-sizing */
+::after,
+::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; /* Essencial para que as larguras com calc() funcionem corretamente */
+}
 
-            <h2 class="title">Envie sua mensagem</h2>
+body {
+    background: linear-gradient(-120deg, #481875, #11031f);
+    font-family: sans-serif;
+}
 
-                
-            <form action=""  method="get">
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh; /* Use min-height para garantir que o contêiner se estenda */
+    padding: 20px; /* Adiciona um pouco de padding para telas pequenas */
+}
 
-                <input type="text" name="name" placeholder="Seu nome">
+.form_box {
+    display: flex;
+    flex-direction: column;
+    background-color: #f6f1f1;
+    border-radius: 8px;
+    width: 700px; /* Largura base */
+    max-width: 100%; /* Garante que não ultrapasse a largura da tela em dispositivos menores */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra para destaque */
+}
 
-                <input type="email" name="email" placeholder="E-mail">
+.form_box .title {
+    padding: 24px 32px;
+    font-size: 24px;
+    border-bottom: thin solid #ccc;
+    color: #333;
+}
 
-                <input type="text" name="subject" placeholder="Assunto">
+.form_box form {
+    display: flex;
+    flex-direction: column; /* Organiza os elementos em coluna por padrão */
+    gap: 16px; /* Espaçamento entre os campos do formulário */
+    padding: 32px;
+}
 
-                <textarea name="menssage" placeholder="Digite Sua Mensagem"></textarea>
+/* Estilos gerais para inputs e textarea */
+.form_box input,
+.form_box textarea {
+    height: 48px; /* Altura consistente para inputs */
+    border-radius: 8px;
+    border: thin solid #999;
+    padding-left: 16px;
+    font-size: 16px;
+    color: #333;
+    outline: none; /* Remove a borda de foco padrão */
+    transition: border-color 0.3s ease; /* Transição suave na borda ao focar */
+}
 
-                <button type="submit">Enviar Mensagem</button>
+.form_box input:focus,
+.form_box textarea:focus {
+    border-color: #6915b8; /* Cor da borda ao focar */
+    box-shadow: 0 0 0 3px rgba(105, 21, 184, 0.2); /* Sombra de foco */
+}
 
+.form_box textarea {
+    height: 180px;
+    padding: 16px; /* Padding para o textarea */
+    resize: vertical; /* Permite redimensionamento vertical */
+}
 
+/* Garante que o campo de assunto sempre ocupe a largura total */
+.form_box input[name="subject"] {
+    width: 97%;
+}
 
-            </form>
+/* Estilos para o grupo de inputs Nome e E-mail */
+.input-group {
+    display: flex;
+    flex-direction: column; /* Por padrão, empilha os campos em telas menores */
+    gap: 16px; /* Espaçamento entre Nome e E-mail (seja empilhado ou lado a lado) */
+    width: 100%; /* Ocupa a largura total da área do formulário */
+}
 
-        </div>    
+/* Largura dos inputs dentro do input-group quando empilhados */
+.input-group input {
+    width: 100%;
+}
 
-    </div>
+/* Media query para telas maiores: faz Nome e E-mail ficarem lado a lado */
+@media (min-width: 600px) { /* Você pode ajustar este breakpoint (ex: 768px para tablets) */
+    .input-group {
+        flex-direction: row; /* Coloca os campos lado a lado */
+    }
+    .input-group input {
+        /* Cada input ocupa quase metade da largura total, com o gap de 16px */
+        width: calc(50% - 8px); /* 100% - 16px (gap) / 2 = 50% - 8px */
+    }
+}
 
-</body>
-</html>
+.form_box button {
+    display: block; /* Garante que o botão se comporte como um bloco */
+    border: none;
+    outline: none;
+    width: 180px;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #6915b8;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: flex-start; /* Alinha o botão à esquerda dentro do formulário flex */
+    transition: background-color 0.3s ease; /* Transição suave ao passar o mouse */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para o botão */
+}
+
+.form_box button:hover {
+    background-color: #561296;
+}
